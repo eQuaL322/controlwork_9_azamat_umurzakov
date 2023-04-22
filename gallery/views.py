@@ -18,6 +18,11 @@ class PhotoDetailView(ListView):
     model = Photo
     template_name = 'gallery/photo_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['favorited_by'] = self.object.favorite_set.all()
+        return context
+
 
 class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Photo

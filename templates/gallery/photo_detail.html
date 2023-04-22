@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% for photo in photos %}
-        <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" width="250px" height="250px">
-        <p>{{ photo.caption }}</p>
-        <p>Автор: {{ photo.author }}</p>
-        <p>Дата создания: {{ photo.created_at }}</p>
-    {% endfor %}
+    <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" width="250px" height="250px">
+    <p>{{ photo.caption }}</p>
+    <p>Автор: {{ photo.author }}</p>
+    <p>Дата создания: {{ photo.created_at }}</p>
+    <h4>Пользователи добавившие в избранное:</h4>
+    <ul>
+        {% for favorite in favorited_by %}
+            <li>
+                <a href="">{{ favorite.user.username }}</a>
+            </li>
+            </ul>
+        {% empty %}
+            <li>
+                <p>Никто еще не добавил это фото в избранное</p>
+            </li>
+        {% endfor %}
 {% endblock %}
