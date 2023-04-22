@@ -2,27 +2,32 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 {% block content %}
-    <h1>Список фото</h1>
-    <ul>
-        {% for photo in photos %}
-            <li>
-                <img src="uploads/{{ photo.image }}" alt="{{ photo.caption }}" width="250px" height="250px">
-                <p>{{ photo.caption }}</p>
-                <p>Автор: {{ photo.author }}</p>
-                <p>Дата создания: {{ photo.created_at }}</p>
-                {% if user.is_authenticated %}
-                    <button class="btn btn-primary btn-sm my-2 favorite-btn" data-photo-id="{{ photo.id }}">
-                        {% csrf_token %}
-                        {% if photo in account.favorites.all %}
-                            Удалить из избранного
-                        {% else %}
-                            Добавить в избранное
-                        {% endif %}
-                    </button>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+    <h3 class="d-flex justify-content-center my-3">Галерея(Галера)</h3>
+
+    <div class="list d-flex justify-content-center">
+        <ul>
+            {% for photo in photos %}
+                <li class="mb-4">
+                    <img src="uploads/{{ photo.image }}" alt="{{ photo.caption }}" width="250px" height="250px">
+                    <p>{{ photo.caption }}</p>
+                    <p>Автор: {{ photo.author }}</p>
+                    <p>Дата создания: {{ photo.created_at }}</p>
+                    <a class="btn btn-primary btn-sm" href="{% url 'photo_detail' photo.pk %}">Подробнее</a>
+                    {% if user.is_authenticated %}
+                        <button class="btn btn-primary btn-sm my-2 favorite-btn" data-photo-id="{{ photo.id }}">
+                            {% csrf_token %}
+                            {% if photo in account.favorites.all %}
+                                Удалить из избранного
+                            {% else %}
+                                Добавить в избранное
+                            {% endif %}
+                        </button>
+                    {% endif %}
+                    <hr>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
     <script>
         $(document).ready(function () {
             $('favorite-btn').click();
