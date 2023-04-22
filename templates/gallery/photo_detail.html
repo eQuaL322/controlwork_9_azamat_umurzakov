@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for photo in photos %}
+        <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" width="250px" height="250px">
+        <p>{{ photo.caption }}</p>
+        <p>Автор: {{ photo.author }}</p>
+        <p>Дата создания: {{ photo.created_at }}</p>
+    {% endfor %}
+{% endblock %}
