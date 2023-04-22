@@ -1,0 +1,20 @@
+from django.contrib.auth import get_user_model
+from django.db import models
+
+
+# Create your models here.
+
+class UserProfile(models.Model):
+    user_profile = models.OneToOneField(
+        get_user_model(),
+        related_name='profile',
+        on_delete=models.CASCADE,
+        verbose_name='Профиль пользователя',
+    )
+    favorites = models.ManyToManyField(
+        to='gallery.Photo',
+        through='gallery.Favorite',
+    )
+
+    def __str__(self):
+        return self.user_profile

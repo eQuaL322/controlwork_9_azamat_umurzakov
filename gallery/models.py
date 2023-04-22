@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from accounts.models import UserProfile
+
 
 class Photo(models.Model):
     image = models.ImageField(
@@ -34,7 +36,7 @@ class Photo(models.Model):
 
 class Favorite(models.Model):
     user = models.ForeignKey(
-        to=get_user_model(),
+        to=UserProfile,
         related_name='favorite_user',
         verbose_name='Избранноое',
         null=False,
