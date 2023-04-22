@@ -8,7 +8,7 @@ class Photo(models.Model):
     image = models.ImageField(
         verbose_name='Фотография',
         null=False,
-        blank=False,
+        blank=True,
         upload_to='photos',
     )
     caption = models.TextField(

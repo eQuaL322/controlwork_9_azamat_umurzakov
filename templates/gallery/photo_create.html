@@ -3,7 +3,7 @@
 {% block title %}Создание{% endblock %}
 {% block content %}
     <div>
-        <form action="#" method='POST' enctype="multipart/form-data">
+        <form action="{% url 'photo_create' %}" method='POST' enctype="multipart/form-data">
             <div class='form'>
                 {% csrf_token %}
                 {% bootstrap_form form %}
