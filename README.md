@@ -12,18 +12,32 @@ API для Photos:
 'api/favorites/add/pk/' по этому адресу добавляется фото в избранное методом POST.
 'api/favorites/remove/pk/ по этому адресу elftybt фото из избранного методом DELETE.
 
-Установка Для начала работы с проектом выполните следующие шаги:
+Локальный запуск проекта
 
-Клонируйте репозиторий на свой компьютер с помощью команды:
+После клонирования проекта выполните команды:
 
-git clone https://github.com/eQuaL322/controlwork_9_azamat_umurzakov.git
+Создайте виртуальное окружение командой
 
-Убедитесь, что у вас установлены все необходимые библиотеки и инструменты. Вам потребуется: Python 3.6 или выше pip (для установки пакетов)
+python -m venv venv
+Активируйте виртуальное окружение командой
 
-Необходимые библиотеки, которые можно установить с помощью команды: pip install -r requirements.txt
+source venv/bin/activate
+venv\Scripts\activate
+Установите зависимости командой
 
-Для запуска программы используйте команду:
+pip install -r requirements.txt
+Перейдите в папку source командой
+
+cd source
+Примените миграции командой
+
+python manage.py migrate
+Запустите проект командой
+
+Далее 
+python3 manage.py loaddata > fixtures/dump.json
 
 python manage.py runserver
+
 
 
