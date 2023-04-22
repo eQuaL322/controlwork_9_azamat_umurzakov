@@ -55,6 +55,11 @@ class PhotoUpdateView(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         return super().get_queryset().filter(author=self.request.user)
 
+    def dispatch(self, request, *args, **kwargs):
+        if not (self.get_object().author == request.user or request.user.groups.filter(name='photo_edit').exists()):
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse_lazy('index')
 
@@ -63,3 +68,8 @@ class PhotoDeleteView(LoginRequiredMixin, DeleteView):
     model = Photo
     template_name = 'gallery/photo_delete.html'
     success_url = reverse_lazy('index')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not (self.get_object().author == request.user or request.user.groups.filter(name='photo_delete').exists()):
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
