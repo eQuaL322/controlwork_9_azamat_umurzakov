@@ -10,9 +10,13 @@ user: login - root2 password - root2
 API для Photos:
 
 'api/photos/' по этому адресу доступны все фото из галереи метод GET.
+
 'api/login/' по этому адресу доступная авторизация.
+
 'api/favorites/add/pk/' по этому адресу добавляется фото в избранное методом POST.
+
 'api/favorites/remove/pk/ по этому адресу elftybt фото из избранного методом DELETE.
+
 
 Локальный запуск проекта
 
