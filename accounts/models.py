@@ -5,7 +5,6 @@ from django.db import models
 class UserProfile(models.Model):
     user_profile = models.OneToOneField(
         get_user_model(),
-        related_name='profile',
         on_delete=models.CASCADE,
         verbose_name='Профиль пользователя',
     )
