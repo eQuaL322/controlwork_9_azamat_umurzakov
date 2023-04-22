@@ -24,7 +24,7 @@ class AddFavorite(APIView):
             photo = Photo.objects.get(id=photo_id)
         except Photo.DoesNotExist:
             return Response({'error': 'Photo with this id does not exists'}, status=status.HTTP_404_NOT_FOUND)
-        favorite, created = Favorite.objects.get_or_create(user=request.user.userprofile, photo=photo)
+        favorite, created = Favorite.objects.get_or_create(user=request.user, photo=photo)
         if not created:
             return Response({'error': 'Already in favorite'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = PhotoSerializer(photo, context={'request': request})
@@ -36,7 +36,7 @@ class RemoveFavorite(APIView):
 
     def delete(self, request, pk):
         try:
-            favorite = Favorite.objects.get(user=request.user.userprofile, photo__id=pk)
+            favorite = Favorite.objects.get(user=request.user, photo__id=pk)
         except Favorite.DoesNotExist:
             return Response({'error': 'Photo is not in favorite'}, status=status.HTTP_400_BAD_REQUEST)
         favorite.delete()

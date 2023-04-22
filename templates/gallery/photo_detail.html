@@ -6,7 +6,7 @@
     <p>Дата создания: {{ photo.created_at }}</p>
     <h4>Пользователи добавившие в избранное:</h4>
     <ul>
-        {% for user_profile in favorited_users %}
+        {% for account in favorited_users %}
             <li>
                 <a href="">{{ user_profile.user.username }}</a>
             </li>

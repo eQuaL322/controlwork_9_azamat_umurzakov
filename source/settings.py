@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'source.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'controlwork_9',
+        'NAME': 'controlwork_999',
         'USER': 'postgres',
         'PASSWORD': '123456',
         'HOST': 'localhost',
@@ -134,6 +134,9 @@ LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
 LOGIN_URL = 'login'
+
+AUTH_USER_MODEL = 'accounts.UserProfile'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

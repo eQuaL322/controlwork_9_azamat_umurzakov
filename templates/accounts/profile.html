@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Профиль: {{ account.user_profile.username }}</h2>
-    <p>{{ account.user_profile.first_name }}</p>
-    <p>{{ account.user_profile.last_name }}</p>
+    <h2>Профиль: {{ account.username }}</h2>
+    <p>{{ account.first_name }}</p>
+    <p>{{ account.last_name }}</p>
     <h3>Избранное фото</h3>
     <div class="row"></div>
     {% for photo in account.favorites.all %}

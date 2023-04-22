@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 {% block content %}
     <h1>Список фото</h1>
     <ul>
@@ -8,7 +10,46 @@
                 <p>{{ photo.caption }}</p>
                 <p>Автор: {{ photo.author }}</p>
                 <p>Дата создания: {{ photo.created_at }}</p>
+                {% if user.is_authenticated %}
+                    <button class="btn btn-primary btn-sm my-2 favorite-btn" data-photo-id="{{ photo.id }}">
+                        {% csrf_token %}
+                        {% if photo in account.favorites.all %}
+                            Удалить из избранного
+                        {% else %}
+                            Добавить в избранное
+                        {% endif %}
+                    </button>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
+    <script>
+        $(document).ready(function () {
+            $('favorite-btn').click();
+            let button = $(this);
+            let photoId = button.data('photo-id')
+            console.log(photoId)
+            let url = button.hasClass('favorite') ? '/favorites/remove/' + photoId + '/' : '/favorites/add/';
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()
+                },
+                success: function (data) {
+                    button.toggleClass('favorite');
+                    if (button.hasClass('favorite')) {
+                        button.text('Удалить из избранного');
+                    } else {
+                        button.text('Добавить в избрранное');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(error)
+                }
+
+            });
+        });
+    </script>
 {% endblock %}
