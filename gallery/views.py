@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
+from accounts.models import UserProfile
 from gallery.forms import PhotoForm
 from gallery.models import Photo
 
@@ -22,7 +23,7 @@ class PhotoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['favorited_users'] = self.object.favorites.all()
+        context['favorited_users'] = UserProfile.objects.filter(favorites=self.object)
         return context
 
 
@@ -53,6 +54,9 @@ class PhotoUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_queryset(self):
         return super().get_queryset().filter(author=self.request.user)
+
+    def get_success_url(self):
+        return reverse_lazy('index')
 
 
 class PhotoDeleteView(LoginRequiredMixin, DeleteView):

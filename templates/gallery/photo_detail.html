@@ -8,7 +8,7 @@
     <ul>
         {% for user_profile in favorited_users %}
             <li>
-                <a href="">{{ user_profile.first_name }}</a>
+                <a href="">{{ user_profile.user.username }}</a>
             </li>
             </ul>
         {% empty %}
