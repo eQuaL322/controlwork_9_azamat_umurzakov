@@ -5,7 +5,7 @@
 superuser: login - root password - root
 user: login - root2 password - root2
 
-Добавление в избранное работает только через API, т.к. JS не успел сделать
+Добавление в избранное работает только через API, т.к. JS не успел сделать.
 
 API для Photos:
 
