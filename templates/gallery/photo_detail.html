@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-    <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" width="250px" height="250px">
+    <img src="/uploads/{{ photo.image }}" alt="#" width="250px" height="250px">
     <p>{{ photo.caption }}</p>
     <p>Автор: {{ photo.author }}</p>
     <p>Дата создания: {{ photo.created_at }}</p>
     <h4>Пользователи добавившие в избранное:</h4>
     <ul>
-        {% for favorite in favorited_by %}
+        {% for account in favorited_users.all %}
             <li>
-                <a href="">{{ favorite.user.username }}</a>
+                <a href="">{{ account.username }}</a>
             </li>
             </ul>
         {% empty %}

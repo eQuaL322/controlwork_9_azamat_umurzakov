@@ -4,11 +4,12 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView, TemplateView
 
 from accounts.forms import LoginForm
+from accounts.models import UserProfile
 
 
 # Create your views here.
 class ProfileView(LoginRequiredMixin, DetailView):
-    model = get_user_model()
+    model = UserProfile
     template_name = 'accounts/profile.html'
     context_object_name = 'account'
 

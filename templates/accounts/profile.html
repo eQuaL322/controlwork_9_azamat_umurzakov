@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Профиль: {{ account.username }}</h2>
-    <p>{{ account.first_name }}</p>
-    <p>{{ account.last_name }}</p>
+    <h2>Профиль: {{ account.user_profile.username }}</h2>
+    <p>{{ account.user_profile.first_name }}</p>
+    <p>{{ account.user_profile.last_name }}</p>
     <h3>Избранное фото</h3>
     <div class="row"></div>
-    {% for photo in favorites.all %}
+    {% for photo in account.favorites.all %}
         <div class="col-md-4">
             <div class="card mb-4">
-                <img src="{{ photo.img.url }}" class="card-img-top" alt="#">
+                <img src="/uploads/{{ photo.image }}" class="card-img-top" alt="#">
                 <div class="card-body">
                     <h5 class="card-title">{{ photo.caption }}</h5>
                     <p class="card-text">Автор: {{ photo.author.username }}</p>

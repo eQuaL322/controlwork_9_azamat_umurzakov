@@ -4,7 +4,7 @@
     <ul>
         {% for photo in photos %}
             <li>
-                <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" width="250px" height="250px">
+                <img src="uploads/{{ photo.image }}" alt="{{ photo.caption }}" width="250px" height="250px">
                 <p>{{ photo.caption }}</p>
                 <p>Автор: {{ photo.author }}</p>
                 <p>Дата создания: {{ photo.created_at }}</p>

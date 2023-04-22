@@ -12,15 +12,16 @@ from gallery.models import Photo
 class PhotoListView(ListView):
     model = Photo
     template_name = 'gallery/photo_list.html'
+    context_object_name = 'photos'
 
 
 class PhotoDetailView(ListView):
     model = Photo
     template_name = 'gallery/photo_detail.html'
+    context_object_name = 'photo'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['favorited_by'] = self.object.favorite_set.all()
         return context
 
 
@@ -31,7 +32,7 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
-            form = self.form_class(request.POST)
+            form = self.form_class(request.POST, request.FILES)
             if form.is_valid():
                 photo = form.save(commit=False)
                 photo.author = request.user
