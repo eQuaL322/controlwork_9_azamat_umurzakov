@@ -5,6 +5,8 @@
 superuser: login - root password - root
 user: login - root2 password - root2
 
+Добавление в избранное работает только через API, т.к. JS не успел сделать
+
 API для Photos:
 
 'api/photos/' по этому адресу доступны все фото из галереи метод GET.
