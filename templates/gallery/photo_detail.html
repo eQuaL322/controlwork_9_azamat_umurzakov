@@ -6,9 +6,9 @@
     <p>Дата создания: {{ photo.created_at }}</p>
     <h4>Пользователи добавившие в избранное:</h4>
     <ul>
-        {% for account in favorited_users.all %}
+        {% for user_profile in favorited_users %}
             <li>
-                <a href="">{{ account.username }}</a>
+                <a href="">{{ user_profile.first_name }}</a>
             </li>
             </ul>
         {% empty %}

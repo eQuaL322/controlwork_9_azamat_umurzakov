@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from gallery.forms import PhotoForm
 from gallery.models import Photo
@@ -15,13 +15,14 @@ class PhotoListView(ListView):
     context_object_name = 'photos'
 
 
-class PhotoDetailView(ListView):
+class PhotoDetailView(DetailView):
     model = Photo
     template_name = 'gallery/photo_detail.html'
     context_object_name = 'photo'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['favorited_users'] = self.object.favorites.all()
         return context
 
 

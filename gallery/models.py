@@ -44,7 +44,8 @@ class Favorite(models.Model):
     )
     photo = models.ForeignKey(
         to=Photo,
-        related_name='favorite_photo',
+        related_name='favorites',
+        related_query_name='favorite',
         verbose_name='Избранноое',
         null=False,
         on_delete=models.CASCADE
