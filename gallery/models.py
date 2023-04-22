@@ -1,0 +1,52 @@
+from django.contrib.auth import get_user_model
+from django.db import models
+
+
+class Photo(models.Model):
+    image = models.ImageField(
+        verbose_name='Фотография',
+        null=False,
+        blank=False,
+        upload_to='photos',
+    )
+    caption = models.TextField(
+        verbose_name='Подпись',
+        max_length=1000,
+        null=False,
+        blank=False,
+    )
+    created_at = models.DateTimeField(
+        verbose_name='Дата и время создания',
+        auto_now_add=True,
+    )
+    author = models.ForeignKey(
+        verbose_name='Автор',
+        to=get_user_model(),
+        related_name='author',
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        ordering = ['-created_at']
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(
+        to=get_user_model(),
+        related_name='favorite_user',
+        verbose_name='Избранноое',
+        null=False,
+        on_delete=models.CASCADE
+    )
+    photo = models.ForeignKey(
+        to=Photo,
+        related_name='favorite_photo',
+        verbose_name='Избранноое',
+        null=False,
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        unique_together = ('user', 'photo')
